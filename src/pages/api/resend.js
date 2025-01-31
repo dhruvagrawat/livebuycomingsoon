@@ -12,25 +12,39 @@ export default async function handler(req, res) {
         }
 
         try {
-            const { data, error } = await resend.emails.send({
-                from: 'Livebuy <onboarding@resend.dev>', // Use a verified sender
-                to: 'devlivebuy8@gmail.com', // Use a verified recipient
-                subject: 'Livebuy Early Access Notification',
+            // Email to user
+            const userEmailResult = await resend.emails.send({
+                from: 'Livebuy <onboarding@resend.dev>',
+                to: email,
+                subject: 'Thanks for Joining Livebuy!',
                 html: `
-                    <h1>Get ready for easy renting with Livebuy!</h1>
-                    <p>We'll notify you as soon as our services are back.</p>
+                    <h1>Thank you for your interest!</h1>
+                    <p>We'll notify you as soon as our services are available.</p>
                 `
             });
 
-            if (error) {
-                console.error('Resend API Error:', error);
-                return res.status(500).json({ error: 'Failed to send email', details: error });
+            // Email to internal team
+            const internalEmailResult = await resend.emails.send({
+                from: 'Livebuy <onboarding@resend.dev>',
+                to: 'devlivebuy8@gmail.com',
+                subject: 'New Livebuy Early Access Signup',
+                html: `
+                    <h2>New User Signup Details</h2>
+                    <p>Email: ${email}</p>
+                    <p>Signed up for early access</p>
+                `
+            });
+
+            // Check for errors in either email send
+            if (userEmailResult.error || internalEmailResult.error) {
+                console.error('Email Send Error:', userEmailResult.error || internalEmailResult.error);
+                return res.status(500).json({ error: 'Failed to send emails' });
             }
 
-            return res.status(200).json({ message: 'Email sent successfully', data });
+            return res.status(200).json({ message: 'Emails sent successfully' });
         } catch (error) {
             console.error('Unexpected Error:', error);
-            return res.status(500).json({ error: 'Failed to send email', details: error.message });
+            return res.status(500).json({ error: 'Failed to send emails', details: error.message });
         }
     } else {
         res.status(405).json({ message: 'Method not allowed' });
