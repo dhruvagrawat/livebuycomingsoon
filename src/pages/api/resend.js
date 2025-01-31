@@ -14,7 +14,7 @@ export default async function handler(req, res) {
         try {
             const { data, error } = await resend.emails.send({
                 from: 'Livebuy <onboarding@resend.dev>', // Use a verified sender
-                to: email,
+                to: 'devlivebuy8@gmail.com', // Use a verified recipient
                 subject: 'Livebuy Early Access Notification',
                 html: `
                     <h1>Get ready for easy renting with Livebuy!</h1>
