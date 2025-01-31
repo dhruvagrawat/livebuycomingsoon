@@ -12,6 +12,16 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      animation: {
+        'pulse-custom': 'pulseCustom 1.5s infinite',
+
+      },
+      keyframes: {
+        pulseCustom: {
+          '0%, 100%': { backgroundColor: 'transparent' },
+          '50%': { backgroundColor: '#FFB400' },
+        },
+      },
     },
   },
   plugins: [],

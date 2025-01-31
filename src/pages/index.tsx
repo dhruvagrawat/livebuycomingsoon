@@ -1,75 +1,204 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import logo from '../../public/1.png';
-import Link from 'next/link';
 import main from '../../public/2.png';
 
 const LivebuyCountdown = () => {
-  const [timeRemaining, setTimeRemaining] = useState(1344 * 3600 + 60 * 60);
+  const LAUNCH_DATE = new Date('2025-04-15T00:00:00Z');
+
+  const [timeRemaining, setTimeRemaining] = useState({
+    months: 0,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+  const [email, setEmail] = useState('');
+  const [notificationStatus, setNotificationStatus] = useState('');
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeRemaining((prevTime) => prevTime - 1);
-    }, 1000);
+    const calculateTimeRemaining = () => {
+      const now = new Date();
+      const difference = LAUNCH_DATE.getTime() - now.getTime();
 
+      if (difference > 0) {
+        const months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30.44));
+        const days = Math.floor((difference % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        setTimeRemaining({ months, days, hours, minutes, seconds });
+      } else {
+        setTimeRemaining({ months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+
+    calculateTimeRemaining();
+    const interval = setInterval(calculateTimeRemaining, 1000);
     return () => clearInterval(interval);
   }, []);
 
-  const hours = Math.floor(timeRemaining / 3600);
-  const minutes = Math.floor((timeRemaining % 3600) / 60);
-  const seconds = timeRemaining % 60;
+  const formatTime = (time: number) => String(time).padStart(2, '0');
+
+  const handleEmailSubmit = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setNotificationStatus('error');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/resend', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setNotificationStatus('success');
+        setEmail('');
+      } else {
+        setNotificationStatus('error');
+      }
+    } catch (error) {
+      setNotificationStatus('error');
+    }
+  };
 
   return (
-    <div>
-      <div className="bg-white py-[0.7%] text-center text-black">
-        <Link href="https://livebuy.in">
-          <div className="overflow-hidden whitespace-nowrap font-semibold">
-            <div className="flex h-[3vh] items-center justify-center">
-              <p className="font-poppins text-[3vw] font-[400] underline sm:text-[2vw] md:text-[1.5vw] lg:text-[1vw]">
-                Get up to 50% off on your first month's rent
-              </p>
-            </div>
-          </div>
-        </Link>
+    <div className="min-h-screen bg-black text-white flex flex-col">
+      {/* Top Banner */}
+      <div className="bg-white py-2 text-center text-black">
+        <a
+          href="https://livebuy.in"
+          className="block overflow-hidden whitespace-nowrap"
+        >
+          <p className="text-xs sm:text-sm md:text-base font-poppins font-semibold underline">
+            Get up to 50% off on your first month's rent
+          </p>
+        </a>
       </div>
-      <div className="bg-black max-h-[96vh] text-white p-8 flex flex-col ">
-        <div className='flex justify-start items-start text-start'>
-          <div className='flex text-red-600 text-start'> Live</div>
+
+      {/* Main Content Container */}
+      <div className="flex-grow flex flex-col">
+        {/* Live Indicator in Top Left of Content Area */}
+        <div className="flex items-center justify-start px-4 pt-4">
+          <span className="h-3 w-3 animate-pulse rounded-full bg-red-500 mr-2"></span>
+          <span className="text-red-500 font-bold">Live</span>
         </div>
-        <div className='bg-black text-white p-8 flex flex-col  items-center'>
-          <div className='flex flex-row gap-2'>
-            <Image src={logo} alt='neew' width={25} height={10}></Image>
-            <p>livebuy</p>
+
+        {/* Centered Content */}
+        <div className="flex-grow flex mt-[20vh] flex-col items-center justify-center text-center px-4">
+          {/* Logo */}
+          <div className="flex items-center justify-center mb-8">
+            <Image
+              src={logo}
+              alt='Livebuy Logo'
+              width={50}
+              height={50}
+              className="mr-2"
+            />
+            <h1 className="text-2xl font-bold">livebuy</h1>
           </div>
-          <div className="flex items-center">
-            <span className="text-8xl font-bold mr-4">{hours}:{minutes}:</span>
-            <span className="text-8xl font-bold text-orange-500">{seconds}</span>
+
+          {/* Countdown Timer */}
+          <div className="mb-8">
+            <div className="flex items-center justify-center text-2xl sm:text-4xl md:text-6xl">
+              <span className="font-bold mr-2">
+                {formatTime(timeRemaining.months)}:{formatTime(timeRemaining.days)}:
+                {formatTime(timeRemaining.hours)}:{formatTime(timeRemaining.minutes)}:
+              </span>
+              <span className="font-bold text-orange-500">
+                {formatTime(timeRemaining.seconds)}
+              </span>
+            </div>
+            <p className="text-sm sm:text-base mt-4">people have signed up</p>
           </div>
-          <p className="text-xl mt-4">people have signed up</p>
-          <div className="flex items-center mt-6">
+
+          {/* Email Signup */}
+          <form
+            onSubmit={handleEmailSubmit}
+            className="w-full max-w-md flex mb-8"
+          >
             <input
               type="email"
-              placeholder="email"
-              className="bg-gray-900 border border-gray-600 text-white px-4 py-2 rounded-l-md"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="flex-grow bg-gray-900 border border-gray-600 text-white px-4 py-2 rounded-l-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+              required
             />
-            <button className="bg-orange-500 text-white px-4 py-2 rounded-r-md">
+            <button
+              type="submit"
+              className="bg-orange-500 text-white px-4 py-2 rounded-r-md hover:bg-orange-600 transition-colors"
+            >
               Notify me
             </button>
-          </div>
-          <p className="text-sm text-gray-400 mt-4">
-            you will be notified when our services are back! easy renting!
-          </p>
-          <p className="text-sm max-w-[90vh] pt-10 text-center text-gray-400 mt-2">
-            hurry up! we're at capacity and offering early access to only 2 million people. sign up now to join the list! we're working tirelessly to restore our services and are overwhelmed by the response.
-          </p>
-        </div>
-        <Image src={main} className='px-[20vh] ' alt='neew' />
+          </form>
 
-        <div className='bg-black text-white p-8 bottom-[1px] flex flex-col  items-center'>
-          <footer className="mt-8 items-center  text-gray-500 text-sm">
-            © copyrights livebuy • all rights reserved • about us
-          </footer>
+          {/* Notification Status */}
+          {notificationStatus === 'success' && (
+            <p className="text-green-500 text-sm mb-4">
+              You will be notified when our services are back! Easy renting!
+            </p>
+          )}
+          {notificationStatus === 'error' && (
+            <p className="text-red-500 text-sm mb-4">
+              Please enter a valid email or try again later.
+            </p>
+          )}
+
+          {/* Capacity Message */}
+          <p className="text-xs sm:text-sm text-gray-400 max-w-[70%] text-center">
+            Hurry up! We're at capacity and offering early access to only 2 million people.
+            Sign up now to join the list! We're working tirelessly to restore our services
+            and are overwhelmed by the response.
+          </p>
         </div>
+      </div>
+
+      {/* Hidden Sections - Appear on Scroll */}
+      <div id="scroll-sections" className="hidden-on-first-view mt-[50vh] ">
+        {/* Background Image */}
+        <div className="w-full px-4 md:px-16 lg:px-32 mt-8">
+          <Image
+            src={main}
+            alt='Background'
+            layout="responsive"
+            objectFit="cover"
+            className="opacity-50"
+          />
+        </div>
+
+        {/* Footer */}
+        <footer className="bg-black text-center py-4 text-gray-500 text-xs mt-8">
+          © Copyrights Livebuy • All Rights Reserved • About Us
+        </footer>
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
+        </svg>
       </div>
     </div>
   );
