@@ -174,7 +174,13 @@ const LivebuyCountdown = () => {
           </div>
         </div>
         {/* Hidden Sections - Appear on Scroll */}
-        <div id="scroll-sections" className="hidden-on-first-view mt-[50vh]">
+        <div id="scroll-sections" className="hidden-on-first-view mt-[35vh]">
+          <div className='flex flex-row items-center justify-center gap-10'>
+            <h2 className="text-2xl font-poppins font-thin text-center">founder's note</h2>
+            <div className="w-[70%] h-[1px] bg-transparent bg-[linear-gradient(to_right,white_50%,transparent_50%)] bg-[length:50px_60px] my-8"></div>
+
+          </div>
+
           {/* Background Image */}
           <div className="w-full px-4 md:px-16 lg:px-32 mt-8">
             <Image
