@@ -92,16 +92,16 @@ const LivebuyCountdown = () => {
         <div className="flex-grow flex flex-col">
           {/* Live Indicator in Top Left of Content Area */}
           <div className="flex items-center justify-between ">
-            <div className='flex items-center justify-start px-12 pt-10'>
+            <div className='flex items-center justify-start px-12 pt-8'>
               <span className="h-3 w-3 animate-pulse rounded-full bg-red-500 mr-2"></span>
               <span className="text-white font-poppins text-lg font-thin">Live</span>
             </div>
-            <div className='px-12 py-7' >
+            <div className='px-12 py-6' >
               <BouncyButton />
             </div>
           </div>
           {/* Centered Content */}
-          <div className="flex-grow flex mt-[15vh] flex-col items-center justify-center text-center px-4">
+          <div className="flex-grow flex mt-[10vh] flex-col items-center justify-center text-center px-4">
             {/* Logo */}
             <div className="flex items-center justify-center mb-8">
               <Image

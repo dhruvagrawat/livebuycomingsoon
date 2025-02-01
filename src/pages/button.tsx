@@ -26,7 +26,7 @@ const BouncyButton: React.FC = () => {
                     }}
                 >
                     <Image
-                        src="/logo.png"
+                        src="/logo.svg"
                         alt="Icon"
                         width={90}
                         height={70}
