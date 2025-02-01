@@ -22,6 +22,11 @@ export default {
           '50%': { backgroundColor: '#FFB400' },
         },
       },
+      fontFamily: {
+
+        poppins: ['Poppins', 'sans-serif'], // Define Poppins properly
+
+      },
     },
   },
   plugins: [],
