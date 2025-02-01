@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import logo from '../../public/1.png';
 import main from '../../public/2.png';
+import BouncyButton from './button';
+import Head from 'next/head';
 
 const LivebuyCountdown = () => {
   const LAUNCH_DATE = new Date('2025-04-01T00:00:00Z');
@@ -69,7 +71,11 @@ const LivebuyCountdown = () => {
   };
 
   return (
+
     <main>
+      <Head>
+        <meta name="Livebuy: Rent flats in 10 minutes!" />
+      </Head>
       <div className="min-h-screen bg-black text-white flex flex-col">
         {/* Top Banner */}
         <div className="bg-white py-2 text-center text-black">
@@ -77,7 +83,7 @@ const LivebuyCountdown = () => {
             href="https://livebuy.in"
             className="block overflow-hidden whitespace-nowrap"
           >
-            <p className="text-xs sm:text-sm md:text-base font-poppins font-thin ">
+            <p className="text-[12px] sm:text-sm font-poppins font-thin ">
               Our kitchen is bustling right now; we'll notify you when the dish is ready! 🎉
             </p>
           </a>
@@ -90,8 +96,8 @@ const LivebuyCountdown = () => {
               <span className="h-3 w-3 animate-pulse rounded-full bg-red-500 mr-2"></span>
               <span className="text-white font-poppins text-lg font-thin">Live</span>
             </div>
-            <div>
-              <button>text</button>
+            <div className='px-12 py-7' >
+              <BouncyButton />
             </div>
           </div>
           {/* Centered Content */}
@@ -109,16 +115,16 @@ const LivebuyCountdown = () => {
             </div>
             {/* Countdown Timer */}
             <div className="mb-8">
-              <div className="flex items-center justify-center text-3xl sm:text-4xl md:text-8xl">
+              <div className="flex items-center justify-center text-3xl sm:text-4xl md:text-7xl">
                 <span className="flex flex-row font-poppins items-end justify-center font-bold">
                   {formatTime(timeRemaining.hours)}:
                   {formatTime(timeRemaining.minutes)}:
                   <span className="font-bold flex flex-row items-end text-[#FF6C3E]">
-                    {formatTime(timeRemaining.seconds)} <div className='text-3xl text-[#A6A6A6] pl-5 pb-3'>hrs</div>
+                    {formatTime(timeRemaining.seconds)} <div className='text-2xl text-[#A6A6A6] pl-5 pb-3'>hrs</div>
                   </span>
                 </span>
               </div>
-              <h1 className="text-base font-poppins lg:text-xl mt-6">
+              <h1 className="text-base font-poppins lg:text-lg mt-6">
                 to flats in 10 minutes launch
               </h1>
             </div>
@@ -139,7 +145,7 @@ const LivebuyCountdown = () => {
                   required
                 />
 
-                <div className='border-t border-b hover:border-[#fff0d8] rounded-r-[9px] border-white'>
+                <div className='border-t border-b rounded-r-[9px] border-white'>
                   <button
                     type="submit"
                     className="bg-white text-sm text-black px-10 py-5 rounded-[9px] hover:bg-[#fff0d8] hover:text-black  transition-colors duration-300 whitespace-nowrap"
@@ -162,9 +168,7 @@ const LivebuyCountdown = () => {
             )}
             {/* Capacity Message */}
             <p className="text-xs sm:text-sm font-poppins text-[#a6a6a6] max-w-[70%] text-center">
-              Hurry up! We're at capacity and offering early access to only 2 million people.<br></br>
-              Sign up now to join the list! We're working tirelessly to restore our services
-              and are overwhelmed by the response.
+              Get notified when we launch! We're revamping our platform to make finding flats faster than ever. <br /> With our new model, you’ll be  able to visit flats—physically or virtually—in just 10 minutes! Request pitch deck or reach out at hi@livebuy.in
             </p>
           </div>
         </div>

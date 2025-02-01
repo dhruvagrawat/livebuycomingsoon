@@ -22,3 +22,12 @@ body {
   font-family: 'Poppins', sans-serif;
 
 }
+
+
+.button-wrapper:hover .button-content {
+  transform: translate(9px, 9px);
+}
+
+.button-wrapper:active .button-content {
+  transform: translate(4px, 6px);
+}
