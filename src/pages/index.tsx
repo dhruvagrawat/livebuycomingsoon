@@ -101,7 +101,7 @@ const LivebuyCountdown = () => {
             </div>
           </div>
           {/* Centered Content */}
-          <div className="flex-grow flex mt-[20vh] flex-col items-center justify-center text-center px-4">
+          <div className="flex-grow flex mt-[15vh] flex-col items-center justify-center text-center px-4">
             {/* Logo */}
             <div className="flex items-center justify-center mb-8">
               <Image
