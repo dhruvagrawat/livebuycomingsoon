@@ -104,7 +104,7 @@ const LivebuyCountdown = () => {
             </div>
             {/* Countdown Timer */}
             <div className="mb-8">
-              <div className="flex items-center justify-center text-3xl sm:text-4xl md:text-9xl">
+              <div className="flex items-center justify-center text-3xl sm:text-4xl md:text-8xl">
                 <span className="flex flex-row font-poppins items-end justify-center font-bold">
                   {formatTime(timeRemaining.hours)}:
                   {formatTime(timeRemaining.minutes)}:
@@ -113,26 +113,36 @@ const LivebuyCountdown = () => {
                   </span>
                 </span>
               </div>
-              <h1 className="text-base font-poppins lg:text-2xl mt-6">
+              <h1 className="text-base font-poppins lg:text-xl mt-6">
                 to flats in 10 minutes launch
               </h1>
             </div>
             {/* Email Signup */}
-            <form onSubmit={handleEmailSubmit} className="w-full max-w-md flex mb-8">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="flex-grow font-poppins bg-gray-900 border border-gray-600 text-white px-4 py-2 rounded-l-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                required
-              />
-              <button
-                type="submit"
-                className="bg-orange-500 font-poppins text-white px-2 py-2 rounded-r-md hover:bg-orange-600 transition-colors"
-              >
-                Notify me
-              </button>
+            <form onSubmit={handleEmailSubmit} className="w-full pb-10 max-w-[500px] relative mt-6">
+              {/* Label positioned on the border */}
+              <div className="absolute -top-3 left-4 px-2 bg-black">
+                <span className="text-white text-sm">email</span>
+              </div>
+
+              <div className="flex w-full">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="flex-grow bg-black border-white  border-t border-b border-l text-white px-4 py-4 rounded-l-lg focus:outline-none  placeholder:text-gray-500"
+                  required
+                />
+
+                <div className='border-t border-b rounded-r-lg border-white'>
+                  <button
+                    type="submit"
+                    className="bg-white text-black px-6 py-4 rounded-lg hover:bg-orange-500 hover:text-white transition-colors duration-300 whitespace-nowrap"
+                  >
+                    Notify me
+                  </button>
+                </div>
+              </div>
             </form>
             {/* Notification Status */}
             {notificationStatus === 'success' && (
