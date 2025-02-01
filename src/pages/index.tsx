@@ -74,7 +74,8 @@ const LivebuyCountdown = () => {
 
     <main>
       <Head>
-        <meta name="Livebuy: Rent flats in 10 minutes!" />
+        <title>Livebuy: Rent flats in 10 minutes!</title>
+
       </Head>
       <div className="min-h-screen bg-black text-white flex flex-col">
         {/* Top Banner */}
