@@ -108,14 +108,14 @@ const LivebuyCountdown = () => {
                 <span className="flex flex-row font-poppins items-end justify-center font-bold">
                   {formatTime(timeRemaining.hours)}:
                   {formatTime(timeRemaining.minutes)}:
-                  <span className="font-bold flex flex-row items-end text-orange-500">
+                  <span className="font-bold flex flex-row items-end text-[#FF6C3E]">
                     {formatTime(timeRemaining.seconds)} <div className='text-3xl text-[#A6A6A6] pl-5 pb-3'>hrs</div>
                   </span>
                 </span>
               </div>
-              <p className="text-sm font-poppins sm:text-base mt-4">
-                people have signed up
-              </p>
+              <h1 className="text-base font-poppins lg:text-2xl mt-6">
+                to flats in 10 minutes launch
+              </h1>
             </div>
             {/* Email Signup */}
             <form onSubmit={handleEmailSubmit} className="w-full max-w-md flex mb-8">
