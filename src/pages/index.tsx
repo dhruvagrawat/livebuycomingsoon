@@ -167,7 +167,7 @@ const LivebuyCountdown = () => {
               </p>
             )}
             {/* Capacity Message */}
-            <p className="text-xs sm:text-sm font-poppins text-[#a6a6a6] max-w-[70%] text-center">
+            <p className="text-xs sm:text-sm font-poppins text-[#a6a6a6] max-w-[80%] text-center">
               Get notified when we launch! We're revamping our platform to make finding flats faster than ever. <br /> With our new model, you’ll be  able to visit flats—physically or virtually—in just 10 minutes! Request pitch deck or reach out at hi@livebuy.in
             </p>
           </div>
