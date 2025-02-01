@@ -85,9 +85,14 @@ const LivebuyCountdown = () => {
         {/* Main Content Container */}
         <div className="flex-grow flex flex-col">
           {/* Live Indicator in Top Left of Content Area */}
-          <div className="flex items-center justify-start px-12 pt-10">
-            <span className="h-3 w-3 animate-pulse rounded-full bg-red-500 mr-2"></span>
-            <span className="text-white font-poppins text-lg font-thin">Live</span>
+          <div className="flex items-center justify-between ">
+            <div className='flex items-center justify-start px-12 pt-10'>
+              <span className="h-3 w-3 animate-pulse rounded-full bg-red-500 mr-2"></span>
+              <span className="text-white font-poppins text-lg font-thin">Live</span>
+            </div>
+            <div>
+              <button>text</button>
+            </div>
           </div>
           {/* Centered Content */}
           <div className="flex-grow flex mt-[20vh] flex-col items-center justify-center text-center px-4">
@@ -121,7 +126,7 @@ const LivebuyCountdown = () => {
             <form onSubmit={handleEmailSubmit} className="w-full pb-10 max-w-[500px] relative mt-6">
               {/* Label positioned on the border */}
               <div className="absolute -top-3 left-4 px-2 bg-black">
-                <span className="text-white text-sm">email</span>
+                <span className="text-[#f2f2f2] text-sm">email</span>
               </div>
 
               <div className="flex w-full">
@@ -129,15 +134,15 @@ const LivebuyCountdown = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="flex-grow bg-black border-white  border-t border-b border-l text-white px-4 py-4 rounded-l-lg focus:outline-none  placeholder:text-gray-500"
+                  placeholder="smellycat69@gmail.com"
+                  className="flex-grow bg-black border-white  border-t border-b border-l text-white px-4 py-4 rounded-l-[9px] focus:outline-none hover:border-[#fff0d8] placeholder:text-[#bebebe]"
                   required
                 />
 
-                <div className='border-t border-b rounded-r-lg border-white'>
+                <div className='border-t border-b hover:border-[#fff0d8] rounded-r-[9px] border-white'>
                   <button
                     type="submit"
-                    className="bg-white text-black px-6 py-4 rounded-lg hover:bg-orange-500 hover:text-white transition-colors duration-300 whitespace-nowrap"
+                    className="bg-white text-sm text-black px-10 py-5 rounded-[9px] hover:bg-[#fff0d8] hover:text-black  transition-colors duration-300 whitespace-nowrap"
                   >
                     Notify me
                   </button>
@@ -156,8 +161,8 @@ const LivebuyCountdown = () => {
               </p>
             )}
             {/* Capacity Message */}
-            <p className="text-xs sm:text-sm font-poppins text-gray-400 max-w-[70%] text-center">
-              Hurry up! We're at capacity and offering early access to only 2 million people.
+            <p className="text-xs sm:text-sm font-poppins text-[#a6a6a6] max-w-[70%] text-center">
+              Hurry up! We're at capacity and offering early access to only 2 million people.<br></br>
               Sign up now to join the list! We're working tirelessly to restore our services
               and are overwhelmed by the response.
             </p>
