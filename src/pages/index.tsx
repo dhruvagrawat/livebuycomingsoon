@@ -77,17 +77,17 @@ const LivebuyCountdown = () => {
             href="https://livebuy.in"
             className="block overflow-hidden whitespace-nowrap"
           >
-            <p className="text-xs sm:text-sm md:text-base font-poppins font-semibold underline">
-              Get up to 50% off on your first month's rent
+            <p className="text-xs sm:text-sm md:text-base font-poppins font-thin ">
+              Our kitchen is bustling right now; we'll notify you when the dish is ready! 🎉
             </p>
           </a>
         </div>
         {/* Main Content Container */}
         <div className="flex-grow flex flex-col">
           {/* Live Indicator in Top Left of Content Area */}
-          <div className="flex items-center justify-start px-8 pt-8">
+          <div className="flex items-center justify-start px-12 pt-10">
             <span className="h-3 w-3 animate-pulse rounded-full bg-red-500 mr-2"></span>
-            <span className="text-red-500 font-poppins font-thin">Live</span>
+            <span className="text-white font-poppins text-lg font-thin">Live</span>
           </div>
           {/* Centered Content */}
           <div className="flex-grow flex mt-[20vh] flex-col items-center justify-center text-center px-4">
@@ -96,20 +96,20 @@ const LivebuyCountdown = () => {
               <Image
                 src={logo}
                 alt="Livebuy Logo"
-                width={50}
-                height={50}
+                width={29}
+                height={29}
                 className="mr-2"
               />
-              <h1 className="text-2xl font-poppins font-bold">livebuy</h1>
+              <h1 className="text-xl font-poppins font-thin">livebuy</h1>
             </div>
             {/* Countdown Timer */}
             <div className="mb-8">
-              <div className="flex items-center justify-center text-2xl sm:text-4xl md:text-6xl">
+              <div className="flex items-center justify-center text-3xl sm:text-4xl md:text-9xl">
                 <span className="flex flex-row font-poppins items-end justify-center font-bold">
                   {formatTime(timeRemaining.hours)}:
                   {formatTime(timeRemaining.minutes)}:
-                  <span className="font-bold text-orange-500">
-                    {formatTime(timeRemaining.seconds)}
+                  <span className="font-bold flex flex-row items-end text-orange-500">
+                    {formatTime(timeRemaining.seconds)} <div className='text-3xl text-[#A6A6A6] pl-5 pb-3'>hrs</div>
                   </span>
                 </span>
               </div>
@@ -129,7 +129,7 @@ const LivebuyCountdown = () => {
               />
               <button
                 type="submit"
-                className="bg-orange-500 font-poppins text-white px-4 py-2 rounded-r-md hover:bg-orange-600 transition-colors"
+                className="bg-orange-500 font-poppins text-white px-2 py-2 rounded-r-md hover:bg-orange-600 transition-colors"
               >
                 Notify me
               </button>
